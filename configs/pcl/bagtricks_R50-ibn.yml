@@ -1,0 +1,12 @@
+_BASE_: ../Base-bagtricks.yml
+
+MODEL:
+  BACKBONE:
+    WITH_IBN: True
+  WEIGHTS: "logs/pcl/bagtricks_R50-ibn/model_final.pth"
+
+DATASETS:
+  NAMES: ("PCL",)
+  TESTS: ("PCL",)
+
+OUTPUT_DIR: logs/pcl/bagtricks_R50-ibn
