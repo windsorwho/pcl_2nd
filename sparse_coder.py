@@ -23,6 +23,8 @@ class ScalarQuantizer(object):
         return code
 
     def to_float(self, code) -> np.float32:
+        if code == 0 and self.min_val >0:
+            return float(0) 
         value = np.float32(code)*self.unit_length + self.min_val 
         return value
 

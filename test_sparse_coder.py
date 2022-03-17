@@ -28,6 +28,6 @@ def read_sample_features():
 
 if __name__ == '__main__':
     test_encoding_error(out_length=0)
-    for i in range(11):
-        test_encoding_error(out_length=2**i)
-        #test_encoding_error(out_length=2**i, min_val=-10, max_val=10)
+    for i in range(8):
+        test_encoding_error(out_length=2**(i+4))
+        test_encoding_error(out_length=2**(i+4), min_val=-1, max_val=6)
