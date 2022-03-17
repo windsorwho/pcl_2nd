@@ -165,10 +165,8 @@ def extract():
             feat = feat / np.linalg.norm(feat, axis=1, keepdims=True)
 
             for in_, fea in zip(in_names, feat):
-                # np.fromfile("a.bin", dtype=np.float)
-                # a.tofile("a.bin")
-                fea.tofile(f"{fea_dir}/{in_[:-4]}.dat")
-
+                basename = get_file_basename(in_)
+                write_feature_file(fea,os.path.join(fea_dir,basename+'.dat'))
 
     print('Extraction Done')
 

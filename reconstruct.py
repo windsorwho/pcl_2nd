@@ -27,8 +27,7 @@ def decompress_feature(path, codec) -> np.ndarray:
 
 def write_feature_file(fea: np.ndarray, path: str):
     assert fea.ndim == 1 and fea.dtype == np.float32
-    with open(path, 'wb') as f:
-        f.write(fea.astype('<f4').tobytes())
+    fea.astype('<f4').tofile(path)
     return True
 
 def reconstruct(byte_rate):
