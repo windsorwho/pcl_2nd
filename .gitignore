@@ -1,5 +1,5 @@
 *.pth
 *.pyc
-query_feature_sample/.DS_Store
+.DS_Store
 query_feature_sample/show_features.py
 *.swp
