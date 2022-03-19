@@ -24,6 +24,8 @@ class ScalarQuantizer(object):
         return code
 
     def to_float(self, code) -> np.float32:
+        if code == 0 and self.min_val > 0:
+            return float(0)
         value = np.float32(code) * self.unit_length + self.min_val
         return value
 
@@ -66,7 +68,7 @@ class SparseVector(object):
     def densify(self, sparse: np.ndarray) -> np.ndarray:
         if len(sparse) != self.out_dim * 2:
             raise ValueError("densify(): incorrect sparse array size.")
-        dense = np.zeros(self.in_dim, dtype=np.float32)
+        dense = np.zeros(self.in_dim, dtype=np.float32) + 0.179
         idx = 0
         for i in range(len(sparse) // 2):
             delta = sparse[i * 2]
