@@ -5,9 +5,6 @@ import torch
 from sklearn.preprocessing import normalize
 import gc
 
-def read_feature_file(path: str) -> np.ndarray:
-    return np.fromfile(path, dtype='<f4')
-
 class NewDataset(torch.utils.data.Dataset):
     def __init__(self, path_list) -> None:
         super().__init__()
@@ -27,6 +24,8 @@ class NewDataset(torch.utils.data.Dataset):
 def reid(bytes_rate):
     torch.cuda.empty_cache()
     DEBUG  = False
+
+
     reconstructed_query_fea_dir = 'reconstructed_query_feature/{}/'.format(bytes_rate)
     gallery_fea_dir = 'gallery_feature/'
     reid_results_path = 'reid_results/{}.json'.format(bytes_rate)
@@ -74,6 +73,8 @@ def reid(bytes_rate):
     # test_gallery = torch.nn.functional.normalize(test_gallery, p=2, dim=1)
     # sim = torch.mm(test_query, test_gallery.t())
     # indece = torch.argsort(-sim, dim=1)[:, :1000]
+    test_gallery = test_gallery.div(torch.norm(test_gallery, dim=1, keepdim=True))
+    test_query = test_query.div(torch.norm(test_query, dim=1, keepdim=True))
 
     total_idx = 0
     sub = {}

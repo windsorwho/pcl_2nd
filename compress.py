@@ -8,7 +8,7 @@ sys.path.insert(0, 'project/')
 import pq as pq
 import pickle
 
-CODEC_BASENAME = 'project/r2_r50_'
+CODEC_BASENAME = 'project/codebooks/r2_r101_'
 
 def get_file_basename(path: str) -> str:
     return os.path.splitext(os.path.basename(path))[0]
@@ -38,6 +38,7 @@ def compress(bytes_rate):
 
     if not isinstance(bytes_rate, int):
         bytes_rate = int(bytes_rate)
+
     # pq coder
     pq_codec = pickle.load(open(f"{CODEC_BASENAME}{bytes_rate}.pkl", 'rb'))
 
@@ -50,12 +51,14 @@ def compress(bytes_rate):
     os.makedirs(compressed_query_fea_dir, exist_ok=True)
 
     query_fea_paths = glob.glob(os.path.join(query_fea_dir, '*.*'))
-    print(query_fea_dir)
+
     assert(len(query_fea_paths) != 0)
+    print(len(query_fea_paths))
 
     for query_fea_path in query_fea_paths:
         query_basename = get_file_basename(query_fea_path)
         fea = read_feature_file(query_fea_path)
+        print(np.linalg.norm(fea))
         compressed_fea_path = os.path.join(compressed_query_fea_dir, query_basename + '.dat')
         compress_feature(fea, pq_codec, compressed_fea_path)
 
