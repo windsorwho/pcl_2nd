@@ -6,7 +6,7 @@ import pickle
 import sys
 sys.path.insert(0, 'project/')
 import pq as pq
-CODEC_BASENAME = 'project/r2_r50_'
+CODEC_BASENAME = 'project/codebooks/r2_r101_'
 
 def get_file_basename(path: str) -> str:
     return os.path.splitext(os.path.basename(path))[0]
@@ -27,6 +27,8 @@ def decompress_feature(path, codec) -> np.ndarray:
 
 def write_feature_file(fea: np.ndarray, path: str):
     assert fea.ndim == 1 and fea.dtype == np.float32
+    # with open(path, 'wb') as f:
+        # f.write(fea.astype('<f4').tobytes())
     fea.astype('<f4').tofile(path)
     return True
 
@@ -54,6 +56,8 @@ def reconstruct(byte_rate):
 
         reconstructed_fea = decompress_feature(compressed_query_fea_path,
                                                pq_codec)
+        print("reconstructed norm: ", np.linalg.norm(reconstructed_fea)) # NOTE:
+
         reconstructed_fea_path = os.path.join(reconstructed_query_fea_dir,
                                               query_basename + '.dat')
         write_feature_file(reconstructed_fea, reconstructed_fea_path)
