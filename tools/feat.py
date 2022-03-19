@@ -94,7 +94,7 @@ def main(args):
     all_feats = torch.cat(all_feats, dim=0)
     print(all_feats.shape)
     all_feats = all_feats.cpu().numpy()
-    np.save(f"{args.feat_file}.npy", all_feats)
+    np.save(f"/home/huangkun/reid_feature/{args.feat_file}.npy", all_feats)
 
 
 
