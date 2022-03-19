@@ -30,7 +30,7 @@ def compress(bytes_rate):
     os.makedirs(compressed_query_fea_dir, exist_ok=True)
 
     query_fea_paths = glob.glob(os.path.join(query_fea_dir, '*.*'))
-    encoder = sparse_coder.SparseVector(out_dim=int(bytes_rate / 2),
+    encoder = sparse_coder.SparseVector(out_dim=int(bytes_rate / 2) - 2,
                                         in_dim=2048,
                                         min_val=-1,
                                         max_val=6)
