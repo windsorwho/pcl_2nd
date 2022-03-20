@@ -74,9 +74,8 @@ class Backbone(nn.Module):
             print('unsupported backbone! but got {}'.format(model_name))
 
         if pretrain_choice == 'imagenet':
-            if model_path:
-                self.base.load_param(model_path)
-                print('Loading pretrained ImageNet model......from {}'.format(model_path))
+            self.base.load_param(model_path)
+            print('Loading pretrained ImageNet model......from {}'.format(model_path))
 
         self.gap = nn.AdaptiveAvgPool2d(1)
         self.num_classes = num_classes
@@ -165,9 +164,8 @@ class build_transformer(nn.Module):
         if cfg.MODEL.TRANSFORMER_TYPE == 'deit_small_patch16_224_TransReID':
             self.in_planes = 384
         if pretrain_choice == 'imagenet':
-            if model_path:
-                self.base.load_param(model_path)
-                print('Loading pretrained ImageNet model......from {}'.format(model_path))
+            self.base.load_param(model_path)
+            print('Loading pretrained ImageNet model......from {}'.format(model_path))
 
         self.gap = nn.AdaptiveAvgPool2d(1)
 

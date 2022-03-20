@@ -85,7 +85,7 @@ def extract():
         img_dir = 'project/' + img_dir
         fea_dir = 'project/' + fea_dir
 
-    cfg_file = "project/configs/pcl/resnet101.yml"
+    cfg_file = "project/configs/pcl/resnet50.yml"
 
     cfg = setup(cfg_file)
 
@@ -101,7 +101,7 @@ def extract():
 
     img_paths = glob.glob(os.path.join(img_dir, '*.*'))
     assert(len(img_paths) != 0)
-    cfg.TEST.WEIGHT = 'project/logs/r101_0317/resnet101_120.pth'
+    cfg.TEST.WEIGHT = 'project/logs/r50_0317/resnet50_120.pth'
     print("cfg weights: ", cfg.TEST.WEIGHT)
 
     num_classes = 15000
